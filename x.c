@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <sys/select.h>
 #include <time.h>
+#include <dirent.h>
 #include <unistd.h>
 #include <libgen.h>
 #include <X11/Xatom.h>
@@ -261,6 +262,7 @@ static char *opt_io    = NULL;
 static char *opt_line  = NULL;
 static char *opt_name  = NULL;
 static char *opt_title = NULL;
+static char *opt_cd    = NULL;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
 
@@ -1965,9 +1967,18 @@ run(void)
 	XEvent ev;
 	int w = win.w, h = win.h;
 	fd_set rfd;
+    DIR* cd;
 	int xfd = XConnectionNumber(xw.dpy), ttyfd, xev, drawing;
 	struct timespec seltv, *tv, now, lastblink, trigger;
 	double timeout;
+    
+    if (opt_cd != NULL) {
+        cd = opendir(opt_cd);
+        if (cd) {
+            chdir(opt_cd);
+            closedir(cd);
+        }
+    }
 
 	/* Waiting for window mapping */
 	do {
@@ -2120,7 +2131,7 @@ usage(void)
 {
 	die("usage: %s [-aiv] [-c class] [-f font] [-g geometry]"
 	    " [-n name] [-o file]\n"
-	    "          [-T title] [-t title] [-w windowid]"
+	    "          [-T title] [-t title] [-cd dir] [-w windowid]"
 	    " [[-e] command [args ...]]\n"
 	    "       %s [-aiv] [-c class] [-f font] [-g geometry]"
 	    " [-n name] [-o file]\n"
@@ -2144,6 +2155,9 @@ main(int argc, char *argv[])
 		break;
 	case 'c':
 		opt_class = EARGF(usage());
+		break;
+	case 'd':
+		opt_cd = EARGF(usage());
 		break;
 	case 'e':
 		if (argc > 0)
