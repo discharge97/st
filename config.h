@@ -7,7 +7,7 @@
  */
 static char *font = "FiraCode-Regular:pixelsize=16:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
-static int borderpx = 2;
+static int borderpx = 5;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -112,28 +112,29 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	"#cc241d",
-	"#98971a",
-	"#d79921",
-	"#458588",
-	"#b16286",
-	"#689d6a",
-	"#a89984",
-	"#928374",
-	"#fb4934",
-	"#b8bb26",
-	"#fabd2f",
-	"#83a598",
-	"#d3869b",
-	"#8ec07c",
-	"#ebdbb2",
-	[255] = 0,
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+		/* 8 normal colors */
+		"#3b4252", /* black   */
+		"#bf616a", /* red     */
+		"#a3be8c", /* green   */
+		"#ebcb8b", /* yellow  */
+		"#81a1c1", /* blue    */
+		"#b48ead", /* magenta */
+		"#88c0d0", /* cyan    */
+		"#e5e9f0", /* white   */
+		/* 8 bright colors */
+		"#4c566a", /* black   */
+		"#bf616a", /* red     */
+		"#a3be8c", /* green   */
+		"#ebcb8b", /* yellow  */
+		"#81a1c1", /* blue    */
+		"#b48ead", /* magenta */
+		"#8fbcbb", /* cyan    */
+		"#eceff4", /* white   */
+		[255] = 0,
+		"#add8e6", /* 256 -> cursor */
+		"#555555", /* 257 -> rev cursor*/
+		"#2e3440", /* background */
+		"#d8dee9", /* foreground */
 };
 
 
@@ -271,8 +272,8 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
 	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
-	{ MODKEY,		XK_s,		changealpha,	{.f = -0.05} },
-	{ MODKEY,		XK_a,		changealpha,	{.f = +0.05} },
+	{ MODKEY,		        XK_s,		    changealpha,	{.f = -0.05} },
+	{ MODKEY,	         	XK_a,    		changealpha,	{.f = +0.05} },
 	{ TERMMOD,              XK_Up,          zoom,           {.f = +1} },
 	{ TERMMOD,              XK_Down,        zoom,           {.f = -1} },
 	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
@@ -280,8 +281,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_U,           zoom,           {.f = +2} },
 	{ TERMMOD,              XK_D,           zoom,           {.f = -2} },
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
+	{ TERMMOD,              XK_y,           externalpipe,   {.v = copyurlcmd } },
+	{ MODKEY,               XK_y,           externalpipe,   {.v = copyoutput } },
 };
 
 /*
