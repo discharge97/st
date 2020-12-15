@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraCode-Regular:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Hack-Regular-Nerd-Font-Complete-Mono:pixelsize=18:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 5;
 
@@ -133,7 +133,7 @@ static const char *colorname[] = {
 		[255] = 0,
 		"#add8e6", /* 256 -> cursor */
 		"#555555", /* 257 -> rev cursor*/
-		"#2e3440", /* background */
+		"#222222", /* background */
 		"#d8dee9", /* foreground */
 };
 
